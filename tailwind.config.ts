@@ -16,5 +16,8 @@ const config: Config = {
     },
   },
   plugins: [],
+  corePlugins: {
+    preflight: false, // 禁止tailwind,默认属性
+  },
 }
 export default config
