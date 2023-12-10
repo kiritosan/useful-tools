@@ -68,6 +68,25 @@ const ${actionName} = (${initialValueKeyWrapper}) => {
     }
 }
 //end ${commentWrapper}`
+const actionFromAPITemplate = `//start ${commentWrapper} FromAPI
+const ${actionName}FromAPI = (params) => {
+    return async (dispatch) => {
+        const result = await postHandle(ajaxApi.API, params);
+        if (result?.code === 20000) {
+            const { data } = result;
+            dispatch({
+                type: ${typeNameWrapper},
+                payload: data
+            })
+        } else {
+            messageInfo.error(result?.message || result)
+        }
+    }
+}
+//end ${commentWrapper} FromAPI`
+const useSelectorTemplate = `
+const XXXXXXKey = useSelector(state => state.XXXReducers.XXXreducer.key)
+`
 
     // 输入一旦变化，三个卡片重新显示
     useEffect(() => {
@@ -87,8 +106,18 @@ const ${actionName} = (${initialValueKeyWrapper}) => {
                 code: actionTemplate,
                 show: true
             },
+            {
+                title: 'ActionFromAPI',
+                code: actionFromAPITemplate,
+                show: true
+            },
+            {
+                title: 'useSelector',
+                code: useSelectorTemplate,
+                show: true
+            },
         ])
-    }, [typeTemplate, reducerTemplate, actionTemplate, inputValues]);
+    }, [typeTemplate, reducerTemplate, actionTemplate, inputValues, actionFromAPITemplate, useSelectorTemplate]);
 
     const handleDestroyComponent = (title: string) => {
         const newCardArr = [...cardArr]
