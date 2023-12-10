@@ -26,12 +26,10 @@ const CodeDisplayComponent = ({ inputValues }: Props) => {
     const { typeName, comment, initialValueKey, initialValueValue } = inputValues
 
     const reducerName = `${typeName || '$$custom$$'}Reducer`
-    debugger
     const actionName = typeName
     ? `set${typeName.charAt(0).toUpperCase()}${typeName.slice(1)}`
     : `set$$CustomAction$$`
-
-    const stateName = `${typeName}State`
+    const stateName = `${typeName || '$$custom$$'}State`
 
     const typeNameWrapper = typeName?.replace(/([A-Z])/g, '_$1').toUpperCase() || '$$TYPE_NAME$$'
     const commentWrapper = comment || '$$中文注释$$'

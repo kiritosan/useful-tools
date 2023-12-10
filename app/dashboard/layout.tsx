@@ -21,12 +21,14 @@ export default function ReduxLayout({
               Back To Dashboard
             </Button>
         </header>
-        {/* <nav></nav> */}
-        <Button type="primary">
-          <Link href="/dashboard/redux">redux</Link>
-        </Button>
 
-        <section className="mt-8">
+        <nav className="px-24 my-4">
+          <Button type="primary">
+            <Link href="/dashboard/redux">redux</Link>
+          </Button>
+        </nav>
+
+        <section>
          {children}
         </section>
       </section>
