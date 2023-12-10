@@ -4,10 +4,15 @@ import { useEffect, useState } from 'react';
 import ClipboardJS from 'clipboard';
 
 interface InputValues {
+    moduleName: string;
     typeName: string;
     comment: string;
     initialValueKey: string;
     initialValueValue: string;
+}
+
+interface Props {
+    inputValues: InputValues;
 }
 
 interface CardArr {
@@ -16,14 +21,19 @@ interface CardArr {
     show: boolean
 }
 
-const CodeDisplayComponent: React.FC<{ inputValues: InputValues }> = ({ inputValues }) => {
+const CodeDisplayComponent = ({ inputValues }: Props) => {
     const [cardArr, setCardArr] = useState<CardArr[]>([]);
     const { typeName, comment, initialValueKey, initialValueValue } = inputValues
 
     const reducerName = `${typeName || '$$custom$$'}Reducer`
-    const actionName = `set${typeName.charAt(0).toUpperCase() || '$$Custom$$'}${typeName.slice(1)}`
+    debugger
+    const actionName = typeName
+    ? `set${typeName.charAt(0).toUpperCase()}${typeName.slice(1)}`
+    : `set$$CustomAction$$`
+
     const stateName = `${typeName}State`
-    const typeNameWrapper = typeName.replace(/([A-Z])/g, '_$1').toUpperCase() || '$$TYPE_NAME$$'
+
+    const typeNameWrapper = typeName?.replace(/([A-Z])/g, '_$1').toUpperCase() || '$$TYPE_NAME$$'
     const commentWrapper = comment || '$$中文注释$$'
     const initialValueKeyWrapper = initialValueKey || '$$key$$'
     const initialValueValueWrapper = initialValueValue || '$$value$$'
@@ -101,7 +111,6 @@ const ${actionName} = (${initialValueKeyWrapper}) => {
                 display: 'flex',
             }}
         >
-
             {
                 cardArr.map(({ title, code, show }) =>
                     show

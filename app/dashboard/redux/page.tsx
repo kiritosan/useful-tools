@@ -7,6 +7,7 @@ import FormComponent from '@/app/components/FormComponent'
 
 function ReduxGenerator() {
   const [inputValues, setInputValues] = useState({
+    moduleName: '',
     typeName: '',
     comment: '',
     initialValueKey: '',

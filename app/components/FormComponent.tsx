@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Col, Form, Input, Row, theme } from 'antd';
 
 interface InputValues {
+    moduleName: string;
     typeName: string;
     comment: string;
     initialValueKey: string;
@@ -10,7 +11,11 @@ interface InputValues {
 
 type SetInputValues = (newValue: InputValues) => void
 
-const FormComponent: React.FC<{ setInputValues: SetInputValues }> = ({ setInputValues }) => {
+interface Props {
+    setInputValues: SetInputValues;
+}
+
+const FormComponent= ({ setInputValues }: Props) => {
     const { token } = theme.useToken();
     const [form] = Form.useForm();
     const { getFieldsValue, setFieldsValue } = form
@@ -24,6 +29,7 @@ const FormComponent: React.FC<{ setInputValues: SetInputValues }> = ({ setInputV
 
     const resetInputValues = () => {
         const initialObj = {
+            moduleName: '',
             typeName: '',
             comment: '',
             initialValueKey: '',
@@ -34,8 +40,12 @@ const FormComponent: React.FC<{ setInputValues: SetInputValues }> = ({ setInputV
     }
 
     const getFields = () => {
-
         const childrenArr = [
+            {
+                name: 'moduleName',
+                label: '模块名',
+                placeHolder: '模块名(小驼峰书写)'
+            },
             {
                 name: 'typeName',
                 label: '类型名',
@@ -60,6 +70,10 @@ const FormComponent: React.FC<{ setInputValues: SetInputValues }> = ({ setInputV
 
         const children = childrenArr.map((childrenObj, i) => {
             const { name, label, placeHolder } = childrenObj
+            const newLocal = () => {
+                debugger
+                setInputValues(getFieldsValue(['moduleName', 'typeName', 'comment', 'initialValueKey', 'initialValueValue']));
+            }
             return (
                 <Col span={12} key={i}>
                     <Form.Item
@@ -68,7 +82,7 @@ const FormComponent: React.FC<{ setInputValues: SetInputValues }> = ({ setInputV
                     >
                         <Input
                             placeholder={placeHolder}
-                            onChange={() => setInputValues(getFieldsValue(['typeName', 'comment', 'initialValueKey', 'initialValueValue']))}
+                            onChange={newLocal}
                         />
                     </Form.Item>
                 </Col>
