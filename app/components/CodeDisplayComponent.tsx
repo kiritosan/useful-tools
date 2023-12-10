@@ -26,19 +26,25 @@ const CodeDisplayComponent = ({ inputValues }: Props) => {
     const { moduleName, typeName, comment, initialValueKey, initialValueValue } = inputValues
 
     const reducerName = `${typeName || '$$custom$$'}Reducer`
+    const moduleReducersName = `${moduleName || '$$custom$$'}Reducers`
     const actionName = typeName
     ? `set${typeName.charAt(0).toUpperCase()}${typeName.slice(1)}`
     : `set$$CustomAction$$`
     const stateName = `${typeName || '$$custom$$'}State`
 
+    /**
+     * 小驼峰处理 假值处理
+     */
     const typeNameWrapper = typeName?.replace(/([A-Z])/g, '_$1').toUpperCase() || '$$TYPE_NAME$$'
     const typeValue = (moduleName && typeName)
     ? moduleName.replace(/([A-Z])/g, '_$1').toUpperCase()
-        + '_' + typeNameWrapper
+    + '_' + typeNameWrapper
     : '$$MODULE_NAME_TYPE_NAME$$'
     const commentWrapper = comment || '$$中文注释$$'
     const initialValueKeyWrapper = initialValueKey || '$$key$$'
     const initialValueValueWrapper = initialValueValue || '$$value$$'
+
+    const selectorName = `${initialValueKeyWrapper}`
 
     const typeTemplate = `const ${typeNameWrapper} = "${typeValue}"; // ${commentWrapper}`
     const reducerTemplate = `//start ${commentWrapper}
@@ -85,7 +91,11 @@ const ${actionName}FromAPI = (params) => {
 }
 //end ${commentWrapper} FromAPI`
 const useSelectorTemplate = `
-const XXXXXXKey = useSelector(state => state.XXXReducers.XXXreducer.key)
+const ${typeName || '$$typeName$$'}${
+    initialValueKey
+    ? initialValueKey?.charAt(0).toUpperCase() + initialValueKey?.slice(1)
+    : '$$Key$$'
+} = useSelector(state => state.${moduleReducersName}.${reducerName}.${initialValueKeyWrapper})
 `
 
     // 输入一旦变化，三个卡片重新显示
