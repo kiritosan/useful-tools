@@ -23,7 +23,7 @@ interface CardArr {
 
 const CodeDisplayComponent = ({ inputValues }: Props) => {
     const [cardArr, setCardArr] = useState<CardArr[]>([]);
-    const { typeName, comment, initialValueKey, initialValueValue } = inputValues
+    const { moduleName, typeName, comment, initialValueKey, initialValueValue } = inputValues
 
     const reducerName = `${typeName || '$$custom$$'}Reducer`
     const actionName = typeName
@@ -32,11 +32,15 @@ const CodeDisplayComponent = ({ inputValues }: Props) => {
     const stateName = `${typeName || '$$custom$$'}State`
 
     const typeNameWrapper = typeName?.replace(/([A-Z])/g, '_$1').toUpperCase() || '$$TYPE_NAME$$'
+    const typeValue = (moduleName && typeName)
+    ? moduleName.replace(/([A-Z])/g, '_$1').toUpperCase()
+        + '_' + typeNameWrapper
+    : '$$MODULE_NAME_TYPE_NAME$$'
     const commentWrapper = comment || '$$中文注释$$'
     const initialValueKeyWrapper = initialValueKey || '$$key$$'
     const initialValueValueWrapper = initialValueValue || '$$value$$'
 
-    const typeTemplate = `const ${typeNameWrapper} = "${typeNameWrapper}"; // ${commentWrapper}`
+    const typeTemplate = `const ${typeNameWrapper} = "${typeValue}"; // ${commentWrapper}`
     const reducerTemplate = `//start ${commentWrapper}
 const ${stateName} = {
     ${initialValueKeyWrapper}: ${initialValueValueWrapper}
