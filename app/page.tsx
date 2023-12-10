@@ -8,9 +8,8 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center justify-between p-24">
       {/* <Link href="/dashboard">Dashboard</Link> */}
-      <Link href="/redux">redux</Link>
       <Button type="primary">
-        Button
+        <Link href="/dashboard/redux">redux</Link>
       </Button>
     </main>
   )
