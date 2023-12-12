@@ -10,6 +10,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@ant-design/cssinjs": "^1.18.1",
     "antd": "^5.12.1",
     "clipboard": "^2.0.11",
     "next": "14.0.4",

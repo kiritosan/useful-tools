@@ -2,15 +2,19 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { Button } from 'antd';
+import { Button, ConfigProvider } from 'antd';
+
+import theme from './theme/themeConfig';
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center justify-between p-24">
+    <ConfigProvider theme={theme}>
+      <main className="flex flex-col items-center justify-between p-24">
       {/* <Link href="/dashboard">Dashboard</Link> */}
       <Button type="primary">
         <Link href="/dashboard/redux">redux</Link>
       </Button>
     </main>
+    </ConfigProvider>
   )
 }
