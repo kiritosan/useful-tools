@@ -14,7 +14,7 @@
 
 /**
  *
- * @returns {Array<number>} returns a new sorted array of number
+ * @returns returns a new sorted array of number
  */
 const bubbleSort: (arr: Array<number>) => Array<number> = (
   arr: Array<number>
