@@ -13,7 +13,7 @@
  */
 
 /**
- *
+ * sort an array of number with bubble sort
  * @returns returns a new sorted array of number
  */
 const bubbleSort: (arr: Array<number>) => Array<number> = (
