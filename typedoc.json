@@ -1,0 +1,3 @@
+{
+  "entryPoints": ["./app/dashboard/algorithm/sort/index.ts"]
+}

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import bubbleSort from './bubble';
+import { bubbleSort } from '.';
 
 
 const originArr = [3,1,3,5,7,3]
