@@ -1,0 +1,60 @@
+/* #15b7b9
+
+#10ddc2
+
+#f5f5f5
+
+#f57170
+
+#212121
+
+#757575
+
+#BDBDBD
+
+#000000 */
+
+/* #cefff1 firstColor
+#ace7ef secondColor
+#a6acec thirdColor
+#a56cc1 fourthColor
+
+#212121 primaryText
+#757575 secondaryText
+#BDBDBD dividerColor
+#000000 text/icons */
+
+:root {
+    --main-color: #cefff1;
+    --second-color: #ace7ef;
+    --third-color: #a6acec;
+    --fourth-color: #a56cc1;
+
+    --background-color: var(--main-color);
+
+    --primary-text: #212121;
+    --secondary-text: #757575;
+    --divider-color: #BDBDBD;
+    --icon-color: #000000;
+}
+
+.viewer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--main-color);
+}
+
+.viewer .data-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--third-color);
+    margin-left: 4px;
+    &:first-child {
+        margin-left: unset;
+    }
+
+}
