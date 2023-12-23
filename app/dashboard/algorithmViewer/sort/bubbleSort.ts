@@ -34,4 +34,32 @@ const bubbleSort: (arr: Array<number>) => Array<number> = (
   return sortedArr;
 };
 
+/**
+ * get snapshots of each step of sort
+ * @returns returns an array of snapshots
+ */
+const getBubbleSortSnapshots: (arr: Array<number>) => Array<Array<number>> = (
+  arr: Array<number>
+): Array<Array<number>> => {
+  const snapshots = [[...arr]]
+  // copy origin list to make the function pure
+  const sortedArr = [...arr];
+  for (let i = 0; i < sortedArr.length; i++) {
+    for (let j = 0; j < sortedArr.length - i - 1; j++) {
+      if (sortedArr[j] > sortedArr[j + 1]) {
+        const temp = sortedArr[j];
+        sortedArr[j] = sortedArr[j + 1];
+        sortedArr[j + 1] = temp;
+      }
+      snapshots.push([...sortedArr]);
+    }
+  }
+
+  return snapshots;
+};
+
 export default bubbleSort;
+
+export {
+  getBubbleSortSnapshots
+}
