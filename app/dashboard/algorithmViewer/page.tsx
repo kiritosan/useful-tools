@@ -18,8 +18,6 @@ const algorithmViewer = () => {
             <Viewer
                 data={arr}
                 onRun={() => bubbleSort(arr)}
-                height={500}
-                width={1000}
             />
         </div>
     );
