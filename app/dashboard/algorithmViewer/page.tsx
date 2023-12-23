@@ -1,7 +1,7 @@
 'use client'
 
 import CodeDisplay from "@/app/components/CodeDisplay";
-import { bubbleSort } from "./sort";
+import { bubbleSort, getBubbleSortSnapshots } from "./sort";
 import Viewer from "./Viewer";
 
 const bubbleSortStr = bubbleSort.toString()
@@ -16,8 +16,7 @@ const algorithmViewer = () => {
                 language={"javascript"}
             />
             <Viewer
-                data={arr}
-                onRun={() => bubbleSort(arr)}
+                snapshots={getBubbleSortSnapshots(arr)}
             />
         </div>
     );
