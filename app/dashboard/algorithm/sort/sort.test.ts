@@ -2,8 +2,7 @@ import { describe, it, expect } from 'vitest';
 import bubbleSort from './bubble';
 
 
-// const originArr = [3,1,3,5,7,3]
-const originArr = [1,2]
+const originArr = [3,1,3,5,7,3]
 
 describe('sort functions:', ()=> {
   it('bubble sort: pure and correct', ()=> {
