@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FC } from 'react';
 import { Button } from 'antd'
+import { useSpring, animated } from '@react-spring/web'
 import './index.css'
 
 import DataItem from './DataItem';
@@ -14,6 +15,13 @@ const Viewer: FC<ViewerProps> = ({
     snapshots,
 }) => {
     const [index, setIndex] = useState(0);
+    // const springs = useSpring({
+    //     from: { x: 0 },
+    //     to: { x: 100 },
+    // })
+    const [springs, api] = useSpring(() => ({
+        from: { x: 0 },
+    }))
 
     const onPrevClick = () => {
         if (index === 0) return;
@@ -23,6 +31,18 @@ const Viewer: FC<ViewerProps> = ({
         if (snapshots.length === index + 1) return;
         setIndex(index + 1)
     }
+
+    const handleClick = () => {
+        api.start({
+            from: {
+                x: 0,
+            },
+            to: {
+                x: 100,
+            },
+        })
+    }
+
     return (
         <>
             <div
@@ -48,6 +68,18 @@ const Viewer: FC<ViewerProps> = ({
                     >Next</Button>
                 </div>
             </div>
+
+            <Button onClick={handleClick}>click</Button>
+
+            <animated.div
+                style={{
+                    width: 80,
+                    height: 80,
+                    background: '#ff6d6d',
+                    borderRadius: 8,
+                    ...springs,
+                }}
+            />
         </>
     );
 };
