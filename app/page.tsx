@@ -10,11 +10,11 @@ export default function Home() {
   return (
     <ConfigProvider theme={theme}>
       <main className="flex flex-col items-center justify-between p-24">
-      {/* <Link href="/dashboard">Dashboard</Link> */}
-      <Button type="primary">
-        <Link href="/dashboard/redux">redux</Link>
-      </Button>
-    </main>
+        {/* <Link href="/dashboard">Dashboard</Link> */}
+        <Button type="primary">
+          <Link href="/dashboard">dashboard</Link>
+        </Button>
+      </main>
     </ConfigProvider>
   )
 }

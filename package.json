@@ -9,7 +9,13 @@
     "lint": "next lint",
     "prepare": "husky install",
     "test": "vitest",
-    "doc": "typedoc"
+    "doc": "typedoc",
+    "format-code": "bash .husky/format-code.sh"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx,json}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@ant-design/cssinjs": "^1.18.1",
