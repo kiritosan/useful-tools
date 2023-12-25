@@ -5,6 +5,8 @@ import { useSpring, animated } from '@react-spring/web'
 import './index.css'
 
 import DataItem from './DataItem';
+import DraggableList from '@/app/components/DraggableList';
+import AnimatedSpan from '@/app/components/AnimatedSpan';
 
 interface ViewerProps {
     // 假设data为arr
@@ -71,7 +73,16 @@ const Viewer: FC<ViewerProps> = ({
 
             <Button onClick={handleClick}>click</Button>
 
-            <animated.div
+            {/* <DraggableList /> */}
+            <div
+                style={{
+                    height: 100
+                }}
+            >
+                <AnimatedSpan />
+            </div>
+
+            {/* <animated.div
                 style={{
                     width: 80,
                     height: 80,
@@ -79,7 +90,8 @@ const Viewer: FC<ViewerProps> = ({
                     borderRadius: 8,
                     ...springs,
                 }}
-            />
+            /> */}
+
         </>
     );
 };
