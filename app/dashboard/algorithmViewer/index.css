@@ -54,7 +54,7 @@
     width: 2rem;
     height: 2rem;
     background-color: var(--third-color);
-    margin-left: 2rem;
+    /* margin-left: 2rem; */
     &:first-child {
         margin-left: unset;
     }

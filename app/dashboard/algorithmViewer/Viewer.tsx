@@ -15,10 +15,19 @@ const Viewer: FC<ViewerProps> = ({
 }) => {
     const [index, setIndex] = useState(0);
 
+    const onPrevClick = () => {
+        if (index === 0) return;
+        setIndex(index - 1)
+    }
+    const onNextClick = () => {
+        if (snapshots.length === index + 1) return;
+        setIndex(index + 1)
+    }
     return (
         <>
             <div
                 className='viewer'
+            // className='md mx-auto h-96 flex items-center justify-center bg-var(--main-color)'
             >
                 {snapshots[index].map((value, index) => {
                     return <DataItem
@@ -28,14 +37,16 @@ const Viewer: FC<ViewerProps> = ({
                     </DataItem>
                 })}
             </div>
-            <div className="controller">
-                <Button
-                    onClick={() => setIndex(index - 1)}
-                >Prev</Button>
-                <div>{index}</div>
-                <Button
-                    onClick={() => setIndex(index + 1)}
-                >Next</Button>
+            <div className="md mx-auto flex justify-center items-center mt-4">
+                <div className='flex space-x-6 justify-center items-center'>
+                    <Button
+                        onClick={onPrevClick}
+                    >Prev</Button>
+                    <div>{index}</div>
+                    <Button
+                        onClick={onNextClick}
+                    >Next</Button>
+                </div>
             </div>
         </>
     );
