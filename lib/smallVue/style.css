@@ -107,3 +107,11 @@ input {
     background-color: #f9f9f9;
   }
 }
+
+#toggleColor {
+  margin: 2em auto;
+  width: 4em;
+  height: 4em;
+  background-color: #1a1a1a;
+  color: white;
+}
