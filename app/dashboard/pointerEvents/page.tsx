@@ -28,24 +28,24 @@ const pointerEvents = () => {
     }
 
     const onMove = (e) => {
-      console.log("🚀 ~ file: page.tsx:16 ~ onMove ~ e:", e)
       moveDom(e)
     }
 
-    dom?.addEventListener('pointermove', onMove)
+    document.addEventListener('pointermove', onMove)
 
     const stopListenMove = () => {
-      dom?.removeEventListener('pointermove', onMove)
-      dom?.removeEventListener('pointerup', stopListenMove)
+      document.removeEventListener('pointermove', onMove)
+      document.removeEventListener('pointerup', stopListenMove)
     }
 
-    dom?.addEventListener('pointerup', stopListenMove)
+    document.addEventListener('pointerup', stopListenMove)
   }
 
   useEffect(() => {
-    const dom = document.querySelector('.moveBlock')
-    dom?.addEventListener('pointerdown', handler)
-    dom?.addEventListener('ondragstart', () => { return false })
+    // const dom = document.querySelector('.moveBlock')
+    document.addEventListener('pointerdown', handler)
+    // dom?.addEventListener('ondragstart', () => { return false })
+    document.ondragstart = () => false
   }, []);
 
   return (
