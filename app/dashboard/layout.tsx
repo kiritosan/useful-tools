@@ -5,7 +5,11 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 
-const buttonArr = ['reduxGenerator', 'algorithmViewer']
+const buttonArr = [
+  'reduxGenerator',
+  'algorithmViewer',
+  'pointerEvents'
+]
 
 export default function ReduxLayout({
   children,
