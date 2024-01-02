@@ -5,14 +5,15 @@ import './index.css';
 
 const pointerEvents = () => {
 
-  const handler = (e) => {
+  const onPointerdown = (e) => {
+    console.log("🚀 ~ file: page.tsx:9 ~ onPointerdown ~ e:", e)
     let xDiff, yDiff
     const dom = document.querySelector('.moveBlock')
+    dom?.setPointerCapture(e.pointerId);
+
     if (dom && dom.style) {
       dom.style.position = 'absolute';
     }
-    console.log("🚀 ~ file: page.tsx:30 ~ handler ~ dom?.style:", dom?.style?.position)
-
 
     const rect = dom?.getBoundingClientRect()
     if (dom) {
@@ -41,21 +42,23 @@ const pointerEvents = () => {
       moveDom(e)
     }
 
-    document.addEventListener('pointermove', onMove)
+    dom?.addEventListener('pointermove', onMove)
 
     const stopListenMove = () => {
-      document.removeEventListener('pointermove', onMove)
-      document.removeEventListener('pointerup', stopListenMove)
+      dom?.removeEventListener('pointermove', onMove)
+      dom?.removeEventListener('pointerup', stopListenMove)
     }
 
-    document.addEventListener('pointerup', stopListenMove)
+    dom?.addEventListener('pointerup', stopListenMove)
   }
 
   useEffect(() => {
-    // const dom = document.querySelector('.moveBlock')
-    document.addEventListener('pointerdown', handler)
+    const dom = document.querySelector('.moveBlock')
+    dom?.addEventListener('pointerdown', onPointerdown)
     // dom?.addEventListener('ondragstart', () => { return false })
-    document.ondragstart = () => false
+    if (dom) {
+      dom.ondragstart = () => false
+    }
   }, []);
 
   return (
