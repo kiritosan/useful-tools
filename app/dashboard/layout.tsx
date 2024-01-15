@@ -8,7 +8,8 @@ import Link from 'next/link'
 const buttonArr = [
   'reduxGenerator',
   'algorithmViewer',
-  'pointerEvents'
+  'pointerEvents',
+  'handsontable'
 ]
 
 export default function ReduxLayout({
