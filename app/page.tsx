@@ -1,10 +1,10 @@
 // 'use client';
 
-import Image from 'next/image'
-import Link from 'next/link'
-import { Button, ConfigProvider } from 'antd';
+import Image from "next/image";
+import Link from "next/link";
+import { Button, ConfigProvider } from "antd";
 
-import theme from './theme/themeConfig';
+import theme from "./theme/themeConfig";
 
 export default function Home() {
   return (
@@ -16,5 +16,5 @@ export default function Home() {
         </Button>
       </main>
     </ConfigProvider>
-  )
+  );
 }

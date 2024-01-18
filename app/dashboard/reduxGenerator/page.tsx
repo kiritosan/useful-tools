@@ -1,35 +1,28 @@
-'use client';
+"use client";
 
-import { useState } from 'react'
-import { Flex } from 'antd';
-import CodeDisplayComponent from '@/app/components/CodeDisplayComponent'
-import FormComponent from '@/app/components/FormComponent'
+import { useState } from "react";
+import { Flex } from "antd";
+import CodeDisplayComponent from "@/app/components/CodeDisplayComponent";
+import FormComponent from "@/app/components/FormComponent";
 
 function ReduxGenerator() {
   const [inputValues, setInputValues] = useState({
-    moduleName: '',
-    typeName: '',
-    comment: '',
-    initialValueKey: '',
-    initialValueValue: '',
+    moduleName: "",
+    typeName: "",
+    comment: "",
+    initialValueKey: "",
+    initialValueValue: "",
   });
 
   return (
     <>
-      <Flex
-        vertical
-        gap='large'
-      >
-        <FormComponent
-          setInputValues={setInputValues}
-        />
+      <Flex vertical gap="large">
+        <FormComponent setInputValues={setInputValues} />
 
-        <CodeDisplayComponent
-          inputValues={inputValues}
-        />
+        <CodeDisplayComponent inputValues={inputValues} />
       </Flex>
     </>
-  )
+  );
 }
 
-export default ReduxGenerator
+export default ReduxGenerator;

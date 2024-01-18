@@ -1,22 +1,22 @@
-'use client'
+"use client";
 
-import { usePathname } from 'next/navigation'
-import Link from 'next/link'
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export function Links() {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   return (
     <nav>
       <ul>
         <li>
-          <Link className={`link ${pathname === '/' ? 'active' : ''}`} href="/">
+          <Link className={`link ${pathname === "/" ? "active" : ""}`} href="/">
             Home
           </Link>
         </li>
         <li>
           <Link
-            className={`link ${pathname === '/about' ? 'active' : ''}`}
+            className={`link ${pathname === "/about" ? "active" : ""}`}
             href="/about"
           >
             About
@@ -24,5 +24,5 @@ export function Links() {
         </li>
       </ul>
     </nav>
-  )
+  );
 }

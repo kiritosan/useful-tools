@@ -1,25 +1,25 @@
 td.custom-cell {
-    color: #fff;
-    background-color: #37bc6c;
+  color: #fff;
+  background-color: #37bc6c;
 }
 
 .custom-table thead th:nth-child(even),
 .custom-table tbody tr:nth-child(odd) th {
-    background-color: #d7f1e1;
+  background-color: #d7f1e1;
 }
 
 .custom-table tbody tr:nth-child(even) td {
-    background-color: rgb(128, 128, 128);
+  background-color: rgb(128, 128, 128);
 }
 
 td.custom-table {
-    background-color: rgb(127, 217, 255);
+  background-color: rgb(127, 217, 255);
 }
 
 .custom-table .htBorders .wtBorder {
-    background-color: #37bc6c !important;
+  background-color: #37bc6c !important;
 }
 
 .custom-table .handsontableInput {
-    box-shadow: inset 0 0 0 2px #37bc6c
+  box-shadow: inset 0 0 0 2px #37bc6c;
 }

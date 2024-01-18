@@ -1,16 +1,10 @@
-import React from 'react';
-import { FC } from 'react'
+import React from "react";
+import { FC } from "react";
 
-interface DataItemProps {
-}
+interface DataItemProps {}
 
 const DataItem: FC<any> = (props) => {
-    return (
-        <span
-            className='data-item'
-            {...props}
-        />
-    );
+  return <span className="data-item" {...props} />;
 };
 
 export default DataItem;

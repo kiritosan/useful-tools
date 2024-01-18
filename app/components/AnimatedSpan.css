@@ -1,28 +1,32 @@
 .animated-span-enter {
-    opacity: 0;
-    transform: translateX(-100%);
+  opacity: 0;
+  transform: translateX(-100%);
 }
 
 .animated-span-enter-active {
-    opacity: 1;
-    transform: translateX(0);
-    transition: opacity 300ms, transform 300ms;
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    opacity 300ms,
+    transform 300ms;
 }
 
 .animated-span-exit {
-    opacity: 1;
-    transform: translateX(0);
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .animated-span-exit-active {
-    opacity: 0;
-    transform: translateX(100%);
-    transition: opacity 300ms, transform 300ms;
+  opacity: 0;
+  transform: translateX(100%);
+  transition:
+    opacity 300ms,
+    transform 300ms;
 }
 
 .span {
-    display: inline-block;
-    padding: 10px;
-    background-color: lightblue;
-    color: white;
+  display: inline-block;
+  padding: 10px;
+  background-color: lightblue;
+  color: white;
 }

@@ -17,7 +17,7 @@
  * @returns returns a new sorted array of number
  */
 const bubbleSort: (arr: Array<number>) => Array<number> = (
-  arr: Array<number>
+  arr: Array<number>,
 ): Array<number> => {
   // copy origin list to make the function pure
   const sortedArr = [...arr];
@@ -39,9 +39,9 @@ const bubbleSort: (arr: Array<number>) => Array<number> = (
  * @returns returns an array of snapshots
  */
 const getBubbleSortSnapshots: (arr: Array<number>) => Array<Array<number>> = (
-  arr: Array<number>
+  arr: Array<number>,
 ): Array<Array<number>> => {
-  const snapshots = [[...arr]]
+  const snapshots = [[...arr]];
   // copy origin list to make the function pure
   const sortedArr = [...arr];
   for (let i = 0; i < sortedArr.length; i++) {
@@ -60,6 +60,4 @@ const getBubbleSortSnapshots: (arr: Array<number>) => Array<Array<number>> = (
 
 export default bubbleSort;
 
-export {
-  getBubbleSortSnapshots
-}
+export { getBubbleSortSnapshots };

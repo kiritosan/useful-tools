@@ -1,53 +1,57 @@
-import { Button, Card, Space } from 'antd';
-import CodeDisplay from './CodeDisplay';
-import { useEffect, useState } from 'react';
-import ClipboardJS from 'clipboard';
+import { Button, Card, Space } from "antd";
+import CodeDisplay from "./CodeDisplay";
+import { useEffect, useState } from "react";
+import ClipboardJS from "clipboard";
 
 interface InputValues {
-    moduleName: string;
-    typeName: string;
-    comment: string;
-    initialValueKey: string;
-    initialValueValue: string;
+  moduleName: string;
+  typeName: string;
+  comment: string;
+  initialValueKey: string;
+  initialValueValue: string;
 }
 
 interface Props {
-    inputValues: InputValues;
+  inputValues: InputValues;
 }
 
 interface CardArr {
-    title: string,
-    code: string,
-    show: boolean
+  title: string;
+  code: string;
+  show: boolean;
 }
 
 const CodeDisplayComponent = ({ inputValues }: Props) => {
-    const [cardArr, setCardArr] = useState<CardArr[]>([]);
-    const { moduleName, typeName, comment, initialValueKey, initialValueValue } = inputValues
+  const [cardArr, setCardArr] = useState<CardArr[]>([]);
+  const { moduleName, typeName, comment, initialValueKey, initialValueValue } =
+    inputValues;
 
-    const reducerName = `${typeName || '$$custom$$'}Reducer`
-    const moduleReducersName = `${moduleName || '$$custom$$'}Reducers`
-    const actionName = typeName
+  const reducerName = `${typeName || "$$custom$$"}Reducer`;
+  const moduleReducersName = `${moduleName || "$$custom$$"}Reducers`;
+  const actionName = typeName
     ? `set${typeName.charAt(0).toUpperCase()}${typeName.slice(1)}`
-    : `set$$CustomAction$$`
-    const stateName = `${typeName || '$$custom$$'}State`
+    : `set$$CustomAction$$`;
+  const stateName = `${typeName || "$$custom$$"}State`;
 
-    /**
-     * 小驼峰处理 假值处理
-     */
-    const typeNameWrapper = typeName?.replace(/([A-Z])/g, '_$1').toUpperCase() || '$$TYPE_NAME$$'
-    const typeValue = (moduleName && typeName)
-    ? moduleName.replace(/([A-Z])/g, '_$1').toUpperCase()
-    + '_' + typeNameWrapper
-    : '$$MODULE_NAME_TYPE_NAME$$'
-    const commentWrapper = comment || '$$中文注释$$'
-    const initialValueKeyWrapper = initialValueKey || '$$key$$'
-    const initialValueValueWrapper = initialValueValue || '$$value$$'
+  /**
+   * 小驼峰处理 假值处理
+   */
+  const typeNameWrapper =
+    typeName?.replace(/([A-Z])/g, "_$1").toUpperCase() || "$$TYPE_NAME$$";
+  const typeValue =
+    moduleName && typeName
+      ? moduleName.replace(/([A-Z])/g, "_$1").toUpperCase() +
+        "_" +
+        typeNameWrapper
+      : "$$MODULE_NAME_TYPE_NAME$$";
+  const commentWrapper = comment || "$$中文注释$$";
+  const initialValueKeyWrapper = initialValueKey || "$$key$$";
+  const initialValueValueWrapper = initialValueValue || "$$value$$";
 
-    const selectorName = `${initialValueKeyWrapper}`
+  const selectorName = `${initialValueKeyWrapper}`;
 
-    const typeTemplate = `const ${typeNameWrapper} = "${typeValue}"; // ${commentWrapper}`
-    const reducerTemplate = `//start ${commentWrapper}
+  const typeTemplate = `const ${typeNameWrapper} = "${typeValue}"; // ${commentWrapper}`;
+  const reducerTemplate = `//start ${commentWrapper}
 const ${stateName} = {
     ${initialValueKeyWrapper}: ${initialValueValueWrapper}
 }
@@ -63,8 +67,8 @@ const ${reducerName} = (initialValue = ${stateName}, action) => {
     }
 
 }
-//end ${commentWrapper}`
-    const actionTemplate = `//start ${commentWrapper}
+//end ${commentWrapper}`;
+  const actionTemplate = `//start ${commentWrapper}
 const ${actionName} = (${initialValueKeyWrapper}) => {
     return async (dispatch) => {
         dispatch({
@@ -73,8 +77,8 @@ const ${actionName} = (${initialValueKeyWrapper}) => {
         })
     }
 }
-//end ${commentWrapper}`
-const actionFromAPITemplate = `//start ${commentWrapper} FromAPI
+//end ${commentWrapper}`;
+  const actionFromAPITemplate = `//start ${commentWrapper} FromAPI
 const ${actionName}FromAPI = (params) => {
     return async (dispatch) => {
         const result = await postHandle(ajaxApi.API, params);
@@ -89,90 +93,98 @@ const ${actionName}FromAPI = (params) => {
         }
     }
 }
-//end ${commentWrapper} FromAPI`
-const useSelectorTemplate = `
-const ${typeName || '$$typeName$$'}${
+//end ${commentWrapper} FromAPI`;
+  const useSelectorTemplate = `
+const ${typeName || "$$typeName$$"}${
     initialValueKey
-    ? initialValueKey?.charAt(0).toUpperCase() + initialValueKey?.slice(1)
-    : '$$Key$$'
-} = useSelector(state => state.${moduleReducersName}.${reducerName}.${initialValueKeyWrapper})
-`
+      ? initialValueKey?.charAt(0).toUpperCase() + initialValueKey?.slice(1)
+      : "$$Key$$"
+  } = useSelector(state => state.${moduleReducersName}.${reducerName}.${initialValueKeyWrapper})
+`;
 
-    // 输入一旦变化，三个卡片重新显示
-    useEffect(() => {
-        setCardArr([
-            {
-                title: 'Type',
-                code: typeTemplate,
-                show: true
-            },
-            {
-                title: 'Reducer',
-                code: reducerTemplate,
-                show: true
-            },
-            {
-                title: 'Action',
-                code: actionTemplate,
-                show: true
-            },
-            {
-                title: 'ActionFromAPI',
-                code: actionFromAPITemplate,
-                show: true
-            },
-            {
-                title: 'useSelector',
-                code: useSelectorTemplate,
-                show: true
-            },
-        ])
-    }, [typeTemplate, reducerTemplate, actionTemplate, inputValues, actionFromAPITemplate, useSelectorTemplate]);
+  // 输入一旦变化，三个卡片重新显示
+  useEffect(() => {
+    setCardArr([
+      {
+        title: "Type",
+        code: typeTemplate,
+        show: true,
+      },
+      {
+        title: "Reducer",
+        code: reducerTemplate,
+        show: true,
+      },
+      {
+        title: "Action",
+        code: actionTemplate,
+        show: true,
+      },
+      {
+        title: "ActionFromAPI",
+        code: actionFromAPITemplate,
+        show: true,
+      },
+      {
+        title: "useSelector",
+        code: useSelectorTemplate,
+        show: true,
+      },
+    ]);
+  }, [
+    typeTemplate,
+    reducerTemplate,
+    actionTemplate,
+    inputValues,
+    actionFromAPITemplate,
+    useSelectorTemplate,
+  ]);
 
-    const handleDestroyComponent = (title: string) => {
-        const newCardArr = [...cardArr]
-        newCardArr.filter(item => item.title === title)[0].show = false
+  const handleDestroyComponent = (title: string) => {
+    const newCardArr = [...cardArr];
+    newCardArr.filter((item) => item.title === title)[0].show = false;
 
-        setCardArr(newCardArr)
-    }
+    setCardArr(newCardArr);
+  };
 
-    useEffect(() => {
-        const clipboard = new ClipboardJS('.copy-button');
+  useEffect(() => {
+    const clipboard = new ClipboardJS(".copy-button");
 
-        return () => {
-            clipboard.destroy();
-        };
-    }, []);
+    return () => {
+      clipboard.destroy();
+    };
+  }, []);
 
-    return (
-        <Space
-            direction="vertical"
-            size="middle"
-            style={{
-                display: 'flex',
-            }}
-        >
-            {
-                cardArr.map(({ title, code, show }) =>
-                    show
-                    && <Card
-                    className='text-center'
-                    title={title}
-                    size="small"
-                    key={title}>
-                        <Button
-                            className="copy-button"
-                            data-clipboard-text={code}
-                            onClick={() => handleDestroyComponent(title)}
-                        >Copy</Button>
-                        <CodeDisplay
-                            code={code}
-                            language="javascript"
-                        />
-                    </Card>)
-            }
-        </Space>
-    );
+  return (
+    <Space
+      direction="vertical"
+      size="middle"
+      style={{
+        display: "flex",
+      }}
+    >
+      {cardArr.map(
+        ({ title, code, show }) =>
+          show && (
+            <Card
+              className="text-center"
+              title={title}
+              size="small"
+              key={title}
+            >
+              <Button
+                className="copy-button"
+                data-clipboard-text={code}
+                onClick={() => handleDestroyComponent(title)}
+              >
+                Copy
+              </Button>
+              <CodeDisplay code={code} language="javascript" />
+            </Card>
+          ),
+      )}
+    </Space>
+  );
 };
 
 export default CodeDisplayComponent;
