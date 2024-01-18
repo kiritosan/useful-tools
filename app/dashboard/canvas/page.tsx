@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import Canvas from "./Canvas";
+import Control from "./Control";
+import { Divider } from "antd";
 
 export default function CanvasWrapper() {
   const wrapperRef = useRef(null);
@@ -32,11 +34,15 @@ export default function CanvasWrapper() {
   }, []);
 
   return (
-    <main
-      className="flex flex-col items-center justify-between"
-      ref={wrapperRef}
-    >
-      <Canvas width={width} height={height} />
-    </main>
+    <>
+      <Control width={width} height={height} />
+      <Divider />
+      <main
+        className="flex flex-col items-center justify-between"
+        ref={wrapperRef}
+      >
+        <Canvas width={width} height={height} />
+      </main>
+    </>
   );
 }
