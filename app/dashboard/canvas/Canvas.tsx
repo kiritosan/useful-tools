@@ -6,11 +6,8 @@ const Canvas = ({ width, height }: { width: number; height: number }) => {
   const canvasRef = useRef(null);
   const widthRef = useRef(width);
   const heightRef = useRef(height);
-  console.log("widthP", width);
-  console.log("heightP", height);
 
   const drawStraightLine = (e) => {
-    console.log(new Date());
     const ctx = (window as any).ctx;
     if (ctx) {
       ctx.beginPath();
@@ -31,25 +28,38 @@ const Canvas = ({ width, height }: { width: number; height: number }) => {
     }
   }, []);
 
+  //   useEffect(() => {
+  //     // bind event of draw line
+  //     if (canvasRef.current) {
+  //       canvasRef.current.addEventListener("click", drawStraightLine);
+  //     }
+  //   }, []);
+
+  const handleClick = (e) => {
+    console.log("🚀 ~ handleClick ~ e:", e);
+  };
+
   useEffect(() => {
-    // bind event of draw line
-    if (canvasRef.current) {
-      canvasRef.current.addEventListener("click", drawStraightLine);
-    }
+    document.addEventListener("click", handleClick);
+    return () => {
+      document.removeEventListener("click", handleClick);
+    };
   }, []);
 
   return (
     // width height dynamic
-    <canvas
-      id="canvas"
-      ref={canvasRef}
-      width={width}
-      height={height}
-      style={{
-        width,
-        height,
-      }}
-    ></canvas>
+    <>
+      <canvas
+        id="canvas"
+        ref={canvasRef}
+        width={width}
+        height={height}
+        style={{
+          width,
+          height,
+        }}
+      ></canvas>
+    </>
   );
 };
 
