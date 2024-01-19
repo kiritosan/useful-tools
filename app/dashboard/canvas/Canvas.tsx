@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 
 // type CanvasProps = ({ width: number, height: number }) => any;
 
@@ -37,18 +37,66 @@ const Canvas = ({ width, height }: { width: number; height: number }) => {
 
   const handleClick = (e) => {
     console.log("🚀 ~ handleClick ~ e:", e);
+    console.log("🚀 ~ handleClick ~ e:clientX", e.clientX);
+    console.log("🚀 ~ handleClick ~ e:clientY", e.clientY);
+    console.log("🚀 ~ handleClick ~ e:pageX", e.pageX);
+    console.log("🚀 ~ handleClick ~ e:pageY", e.pageY);
+    console.log("🚀 ~ handleClick ~ e:screenX", e.screenX);
+    console.log("🚀 ~ handleClick ~ e:screenY", e.screenY);
+    console.log("🚀 ~ handleClick ~ e:offsetX", e.offsetX);
+    console.log("🚀 ~ handleClick ~ e:offsetY", e.offsetY);
+    console.log("🚀 ~ handleClick ~ e:x", e.x);
+    console.log("🚀 ~ handleClick ~ e:y", e.y);
+  };
+
+  const onMouseDown = (e) => {
+    e.preventDefault();
+    const { pageX, pageY } = e;
+    const _downPageX = pageX;
+    const _downPageY = pageY;
+
+    const onMouseMove = (e) => {
+      if (!canvasRef.current) return;
+      const rect = canvasRef.current.getBoundingClientRect();
+
+      const leftCenter = rect.left + rect.width / 2;
+      const topCenter = rect.top;
+
+      const { pageX, pageY } = e;
+
+      let x = pageX - leftCenter;
+      let y = pageY - _downPageY;
+      console.log("🚀 ~ onMouseMove ~ x:", x);
+      console.log("🚀 ~ onMouseMove ~ y:", y);
+    };
+
+    const onMouseUp = (e) => {
+      e.preventDefault();
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseup", onMouseUp);
+
+      //   requestAnimationFrame(run);
+    };
+
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseup", onMouseUp);
   };
 
   useEffect(() => {
-    document.addEventListener("click", handleClick);
+    if (canvasRef.current) {
+      canvasRef.current.addEventListener("mousedown", onMouseDown);
+    }
     return () => {
-      document.removeEventListener("click", handleClick);
+      if (canvasRef.current) {
+        canvasRef.current.removeEventListener("mousedown", onMouseDown);
+      }
     };
   }, []);
 
   return (
     // width height dynamic
     <>
+      {/* <Suspense fallback={<p>Loading feed...</p>}> */}
       <canvas
         id="canvas"
         ref={canvasRef}
@@ -58,7 +106,9 @@ const Canvas = ({ width, height }: { width: number; height: number }) => {
           width,
           height,
         }}
+        className="border-double border-8 border-sky-500"
       ></canvas>
+      {/* </Suspense> */}
     </>
   );
 };
