@@ -10,6 +10,7 @@ const buttonArr = [
   "pointerEvents",
   "handsontable",
   "canvas",
+  "sakana",
 ];
 
 export default function ReduxLayout({
