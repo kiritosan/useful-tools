@@ -6,6 +6,7 @@ const Canvas = ({ width, height }: { width: number; height: number }) => {
   const canvasRef = useRef(null);
   const widthRef = useRef(width);
   const heightRef = useRef(height);
+  const shouldRender = useRef(true);
 
   const drawStraightLine = (e) => {
     const ctx = (window as any).ctx;
@@ -64,7 +65,7 @@ const Canvas = ({ width, height }: { width: number; height: number }) => {
 
       const { pageX, pageY } = e;
 
-      let x = pageX - leftCenter;
+      let x = pageX - _downPageX;
       let y = pageY - _downPageY;
       console.log("🚀 ~ onMouseMove ~ x:", x);
       console.log("🚀 ~ onMouseMove ~ y:", y);
@@ -82,6 +83,13 @@ const Canvas = ({ width, height }: { width: number; height: number }) => {
     document.addEventListener("mouseup", onMouseUp);
   };
 
+  const renderCanvas = () => {
+    if (shouldRender.current) {
+      console.log("test");
+      requestAnimationFrame(renderCanvas);
+    }
+  };
+
   useEffect(() => {
     if (canvasRef.current) {
       canvasRef.current.addEventListener("mousedown", onMouseDown);
@@ -91,6 +99,13 @@ const Canvas = ({ width, height }: { width: number; height: number }) => {
         canvasRef.current.removeEventListener("mousedown", onMouseDown);
       }
     };
+  }, []);
+
+  useEffect(() => {
+    renderCanvas();
+    setTimeout(() => {
+      shouldRender.current = false;
+    }, 1000);
   }, []);
 
   return (
